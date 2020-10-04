@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "./Button";
 import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+
 describe("button test", () => {
   it("focus and enter should fire handle click", () => {
     const handleFocus = jest.fn();
@@ -16,10 +18,7 @@ describe("button test", () => {
 
     fireEvent.focus(button);
     expect(handleFocus).toHaveBeenCalled();
-    fireEvent.keyDown(screen.getByRole("button"), {
-      key: "Space",
-      code: "Space",
-    });
+    userEvent.type(screen.getByRole("button"), "{space}");
     expect(handleClick).toHaveBeenCalled();
   });
 });
